@@ -1,0 +1,45 @@
+<template>
+  <div class="About">
+    <Nav />
+    <p>Made with ❤️ by Olumjs</p>
+  </div>
+</template>
+
+<script>
+  import Nav from "../components/layout/nav";
+  export default class About {
+    data() {
+      return {
+        name: "About",
+        components: { Nav },
+        template: this.template(),
+        style: this.style(),
+        render: this.render.bind(this),
+      };
+    }
+
+    render() {}
+  }
+</script>
+
+<style lang="scss">
+  .About {
+    max-width: 500px;
+    width: calc(100% - 20px);
+    background-color: white;
+    margin: 10px auto;
+    border-radius: 3px;
+    border: 1px solid $border;
+    padding: 10px;
+    > p {
+      font: {
+        weight: 400;
+        size: 14px;
+      }
+      line-height: 19px;
+      word-break: break-word;
+      color: #1d2129;
+      text-align: center;
+    }
+  }
+</style>

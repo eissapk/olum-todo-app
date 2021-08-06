@@ -1,0 +1,96 @@
+<template>
+  <div class="Todos">
+    <ul></ul>
+  </div>
+</template>
+
+<script>
+  import { api } from "../services/api.js";
+  import { olum } from "../app.mjs";
+  import { $ } from "olum";
+  export default class Todos {
+    trash = `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>`;
+    data() {
+      return {
+        name: "Todos",
+        components: {},
+        template: this.template(),
+        style: this.style(),
+        render: this.render.bind(this),
+      };
+    }
+
+    render() {
+      this.displayTodos();
+      this.deleteTodo();
+    }
+
+    displayTodos() {
+
+
+      const foo = () => {
+        const todos = api.get();
+        const ul = $(".Todos ul");
+        ul.innerHTML = todos
+          .map(todo => `<li><p>${todo.title}</p><button type="button" data-id="${todo.id}" class="delBtn">${this.trash}</button></li>`)
+          .join("");
+          console.warn("displayTodos");
+      }
+
+      window.on(api.event, foo);
+      api.trigger();
+      window.off(api.event, foo);
+
+    }
+
+    deleteTodo() {
+      const container = $(".Todos");
+      container.on("click", e => {
+        if (e.target.classList.contains("delBtn")) {
+          const id = e.target.getAttribute("data-id");
+          api.delete(id);
+        }
+      });
+    }
+  }
+</script>
+
+<style lang="scss">
+  .Todos {
+    ul {
+      li {
+        overflow: hidden;
+        margin: 10px 0;
+        p {
+          width: calc(100% - 50px);
+          font: {
+            weight: 400;
+            size: 14px;
+          }
+          line-height: 16px;
+          background: #f2f3f5;
+          color: #1c1e21;
+          border-radius: 18px;
+          padding: 9.5px;
+          word-break: break-word;
+          float: left;
+          margin: 0;
+        }
+        button {
+          float: left;
+          width: 30px;
+          height: 30px;
+          background-color: transparent;
+          border: none;
+          margin: 5px 10px;
+          svg {
+            width: 100%;
+            path {
+              fill: #606770;
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
