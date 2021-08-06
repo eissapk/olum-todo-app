@@ -26,21 +26,15 @@
     }
 
     displayTodos() {
-
-
-      const foo = () => {
-        const todos = api.get();
-        const ul = $(".Todos ul");
-        ul.innerHTML = todos
-          .map(todo => `<li><p>${todo.title}</p><button type="button" data-id="${todo.id}" class="delBtn">${this.trash}</button></li>`)
-          .join("");
-          console.warn("displayTodos");
+      if (api.switch) { // listen only once
+        api.switch = false;
+        window.on(api.event, () => {
+          const todos = api.get();
+          const ul = $(".Todos ul");
+          ul.innerHTML = todos.map(todo => `<li><p>${todo.title}</p><button type="button" data-id="${todo.id}" class="delBtn">${this.trash}</button></li>`).join("");
+        });
       }
-
-      window.on(api.event, foo);
       api.trigger();
-      window.off(api.event, foo);
-
     }
 
     deleteTodo() {

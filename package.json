@@ -1,7 +1,7 @@
 {
-  "name": "my-awesome-olum-app",
+  "name": "todo-app",
   "version": "1.0.0",
-  "description": "My awesome olum app",
+  "description": "olum todo app",
   "main": "tasks",
   "scripts": {
     "dev": "gulp dev --require babel-polyfill --require @babel/register --gulpfile tasks",

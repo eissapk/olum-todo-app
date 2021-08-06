@@ -4,6 +4,7 @@ class API extends Service {
   constructor() {
     super("ApiDataLoaded");
   }
+  switch = true;
 
   add(todo) {
     const arr = this.get();
