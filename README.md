@@ -1,18 +1,16 @@
-# todo-app
+# olum-todo-app
 
-### Getting Started
-
-* Install packages
-```bash
-npm i
+## Installation
+```
+npm install
 ```
 
-* Run development server
-```bash
+### Development server
+```
 npm run dev
 ```
 
-* Build for deployment
-```bash
+### Build for production
+```
 npm run build
 ```

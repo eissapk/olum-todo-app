@@ -6,18 +6,8 @@
 </template>
 
 <script>
-  import Nav from "../components/layout/nav";
+  import Nav from "../components/layout/Nav.html";
   export default class About {
-    data() {
-      return {
-        name: "About",
-        components: { Nav },
-        template: this.template(),
-        style: this.style(),
-        render: this.render.bind(this),
-      };
-    }
-
     render() {}
   }
 </script>
@@ -36,6 +26,7 @@
         weight: 400;
         size: 14px;
       }
+      margin-top: 10px;
       line-height: 19px;
       word-break: break-word;
       color: #1d2129;

@@ -6,32 +6,24 @@
 
 <script>
   import { api } from "../services/api.js";
-  import { olum } from "../app.mjs";
-  import { $ } from "olum";
+  import { $ } from "olum-helpers";
+  import icons from "../services/icons.js";
   export default class Todos {
-    trash = `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash" class="svg-inline--fa fa-trash fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"></path></svg>`;
-    data() {
-      return {
-        name: "Todos",
-        components: {},
-        template: this.template(),
-        style: this.style(),
-        render: this.render.bind(this),
-      };
-    }
-
     render() {
       this.displayTodos();
       this.deleteTodo();
     }
 
     displayTodos() {
-      if (api.switch) { // listen only once
+      if (api.switch) {
+        // listen only once
         api.switch = false;
         window.on(api.event, () => {
           const todos = api.get();
           const ul = $(".Todos ul");
-          ul.innerHTML = todos.map(todo => `<li><p>${todo.title}</p><button type="button" data-id="${todo.id}" class="delBtn">${this.trash}</button></li>`).join("");
+          ul.innerHTML = todos
+            .map(todo => `<li><p>${todo.title}</p><button type="button" data-id="${todo.id}" class="delBtn">${icons.trash}</button></li>`)
+            .join("");
         });
       }
       api.trigger();
@@ -79,6 +71,7 @@
           margin: 5px 10px;
           svg {
             width: 100%;
+            height: 100%;
             path {
               fill: #606770;
             }

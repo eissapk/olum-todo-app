@@ -1,4 +1,4 @@
-import { Service } from "olum";
+import { Service } from "olum-helpers";
 
 class API extends Service {
   constructor() {
